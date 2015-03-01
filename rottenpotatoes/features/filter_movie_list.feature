@@ -1,3 +1,6 @@
+#Thotsawat Fukiatisut 5410611957
+#Ratithorn Visavajuntrarom 5410610967
+
 Feature: display list of movies filtered by MPAA rating
  
   As a concerned parent
@@ -20,8 +23,29 @@ Background: movies have been added to database
   | Chicken Run             | G      | 21-Jun-2000  |
 
   And  I am on the RottenPotatoes home page
+    Then I should see all of the movies
 
 Scenario: restrict to movies with 'PG' or 'R' ratings
+  Given I am on the RottenPotatoes home page
+  Then I should see all of the movies
+	When I check the following ratings: PG, R
+	And I press "Refresh"
+	  Then the "ratings[PG]" checkbox should be checked
+	  And the "ratings[R]" checkbox should be checked
+	  And the "ratings[G]" checkbox should not be checked
+		And the "ratings[PG-13]" checkbox should not be checked
+		And the "ratings[NC-17]" checkbox should not be checked
+		And I should not see "Aladdin"
+		And I should see "The Terminator"
+		And I should see "When Harry Met Sally"
+		And I should not see "The Help"
+		And I should not see "Chocolat"
+		And I should see "Amelie"
+		And I should not see "2001: A Space Odyssey"
+		And I should see "The Incredibles"
+		And I should see "Raiders of the Lost Ark"
+		And I should not see "Chicken Run"
+  
   # enter step(s) to check the 'PG' and 'R' checkboxes
   # enter step(s) to uncheck all other checkboxes
   # enter step to "submit" the search form on the homepage
@@ -30,3 +54,8 @@ Scenario: restrict to movies with 'PG' or 'R' ratings
 
 Scenario: all ratings selected
   # see assignment
+  
+  Given I am on the RottenPotatoes home page
+	When I check the following ratings: G, PG, PG-13, NC-17, R
+	And I press "Refresh"
+	Then I should see all of the movies

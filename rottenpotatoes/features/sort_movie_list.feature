@@ -1,3 +1,8 @@
+#Thotsawat Fukiatisut 5410611957
+#Ratithorn Visavajuntrarom 5410610967
+
+
+
 Feature: display list of movies sorted by different criteria
  
   As an avid moviegoer
